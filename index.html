@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profiling</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <span class="logo-icon">&#9670;</span>
+      Profiling
+    </div>
+  </header>
+
+  <main>
+    <div class="toolbar">
+      <div class="search-group">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" id="search-input" placeholder="Search by name...">
+      </div>
+      <div class="select-wrap">
+        <select id="filter-gender">
+          <option value="">All Genders</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" onclick="openAddModal()">+ New Profile</button>
+    </div>
+
+    <div class="table-card">
+      <div class="table-header">
+        <span class="table-title">Profiles</span>
+        <span class="table-count" id="profile-count">0 records</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Occupation</th>
+            <th>Address</th>
+            <th class="th-actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+      <div id="empty-state" class="empty">
+        <div class="empty-icon">&#128100;</div>
+        <p>No profiles found</p>
+        <span>Click "New Profile" to add your first record.</span>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="form-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="form-title">New Profile</h2>
+        <button class="btn-close" onclick="closeFormModal()">&times;</button>
+      </div>
+      <form id="profile-form" onsubmit="saveProfile(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name <span class="required">*</span></label>
+            <input type="text" id="first_name" required placeholder="John">
+          </div>
+          <div class="form-group">
+            <label>Last Name <span class="required">*</span></label>
+            <input type="text" id="last_name" required placeholder="Doe">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Age</label>
+            <input type="number" id="age" placeholder="25">
+          </div>
+          <div class="form-group">
+            <label>Gender <span class="required">*</span></label>
+            <select id="gender" required>
+              <option value="" disabled selected>Select gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group full">
+          <label>Occupation</label>
+          <input type="text" id="occupation" placeholder="Software Engineer">
+        </div>
+        <div class="form-group full">
+          <label>Address</label>
+          <textarea id="address" rows="2" placeholder="123 Main St, City"></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeFormModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="form-submit-btn">Save Profile</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="view-modal">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h2>Profile Details</h2>
+        <button class="btn-close" onclick="closeViewModal()">&times;</button>
+      </div>
+      <div id="view-content"></div>
+      <div class="form-actions">
+        <button class="btn btn-secondary" onclick="closeViewModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

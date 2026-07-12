@@ -1,0 +1,15 @@
+ALTER TABLE profiles
+  DROP COLUMN IF EXISTS middle_name,
+  DROP COLUMN IF EXISTS suffix,
+  DROP COLUMN IF EXISTS birthdate,
+  DROP COLUMN IF EXISTS civil_status,
+  DROP COLUMN IF EXISTS contact_number,
+  DROP COLUMN IF EXISTS email,
+  DROP COLUMN IF EXISTS company,
+  DROP COLUMN IF EXISTS nationality,
+  DROP COLUMN IF EXISTS religion,
+  DROP COLUMN IF EXISTS emergency_contact_name,
+  DROP COLUMN IF EXISTS emergency_contact_number,
+  DROP COLUMN IF EXISTS additional_remarks,
+  DROP COLUMN IF EXISTS comments,
+  DROP COLUMN IF EXISTS photo_url;
