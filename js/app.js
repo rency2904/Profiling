@@ -154,8 +154,6 @@ async function loadProfiles() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  loadProfiles();
-
   document.getElementById('search-input').addEventListener('input', () => {
     clearTimeout(window._searchTimer);
     window._searchTimer = setTimeout(loadProfiles, 300);
