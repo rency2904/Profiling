@@ -11,6 +11,9 @@ router.get('/', async (req, res) => {
         `SELECT * FROM profiles
          WHERE first_name ILIKE $1 OR last_name ILIKE $1
             OR occupation ILIKE $1
+            OR barangay_name ILIKE $1
+            OR city_name ILIKE $1
+            OR province_name ILIKE $1
          ORDER BY created_at DESC`,
         [`%${q}%`]
       );
@@ -79,13 +82,25 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { first_name, last_name, age, gender, occupation, address } = req.body;
+    const {
+      first_name, last_name, age, gender, occupation,
+      province_code, province_name, city_code, city_name,
+      barangay_code, barangay_name, purok
+    } = req.body;
+
+    const address = [purok, barangay_name, city_name, province_name]
+      .filter(Boolean).join(', ');
 
     const result = await pool.query(
-      `INSERT INTO profiles (first_name, last_name, age, gender, occupation, address)
-       VALUES ($1,$2,$3,$4,$5,$6)
+      `INSERT INTO profiles
+        (first_name, last_name, age, gender, occupation, address,
+         province_code, province_name, city_code, city_name,
+         barangay_code, barangay_name, purok)
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)
        RETURNING *`,
-      [first_name, last_name, age, gender, occupation, address]
+      [first_name, last_name, age, gender, occupation, address,
+       province_code, province_name, city_code, city_name,
+       barangay_code, barangay_name, purok]
     );
 
     res.status(201).json(result.rows[0]);
@@ -98,16 +113,29 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { first_name, last_name, age, gender, occupation, address } = req.body;
+    const {
+      first_name, last_name, age, gender, occupation,
+      province_code, province_name, city_code, city_name,
+      barangay_code, barangay_name, purok
+    } = req.body;
+
+    const address = [purok, barangay_name, city_name, province_name]
+      .filter(Boolean).join(', ');
 
     const result = await pool.query(
       `UPDATE profiles SET
         first_name = $1, last_name = $2, age = $3,
         gender = $4, occupation = $5, address = $6,
+        province_code = $7, province_name = $8,
+        city_code = $9, city_name = $10,
+        barangay_code = $11, barangay_name = $12,
+        purok = $13,
         updated_at = NOW()
-       WHERE id = $7
+       WHERE id = $14
        RETURNING *`,
-      [first_name, last_name, age, gender, occupation, address, id]
+      [first_name, last_name, age, gender, occupation, address,
+       province_code, province_name, city_code, city_name,
+       barangay_code, barangay_name, purok, id]
     );
 
     if (result.rows.length === 0) {

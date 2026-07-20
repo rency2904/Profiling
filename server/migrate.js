@@ -31,6 +31,13 @@ async function migrate() {
     );
     await pool.query(sql4);
     console.log('Migration 4 completed: sessions table created');
+
+    const sql5 = fs.readFileSync(
+      path.join(__dirname, 'migrations', '005_add_address_fields.sql'),
+      'utf-8'
+    );
+    await pool.query(sql5);
+    console.log('Migration 5 completed: address fields added');
   } catch (err) {
     console.error('Migration failed:', err);
   } finally {
