@@ -17,6 +17,13 @@ async function migrate() {
     );
     await pool.query(sql2);
     console.log('Migration 2 completed: unused columns dropped');
+
+    const sql3 = fs.readFileSync(
+      path.join(__dirname, 'migrations', '003_create_admins.sql'),
+      'utf-8'
+    );
+    await pool.query(sql3);
+    console.log('Migration 3 completed: admins table created');
   } catch (err) {
     console.error('Migration failed:', err);
   } finally {
