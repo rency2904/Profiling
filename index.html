@@ -39,7 +39,47 @@
         <button type="submit" class="login-btn" id="login-btn">
           <span id="login-btn-text">Sign In</span>
         </button>
+        <button type="button" class="login-link-btn" id="forgot-link" onclick="showForgotPassword()">Forgot Password?</button>
       </form>
+      <div class="forgot-panel" id="forgot-panel">
+        <div class="forgot-header">
+          <h3>Reset Password</h3>
+          <p>Enter your recovery code and new password.</p>
+        </div>
+        <div class="login-field">
+          <label>Username</label>
+          <div class="input-wrap">
+            <input type="text" id="reset-username" placeholder="Enter your username" autocomplete="off">
+          </div>
+        </div>
+        <div class="login-field">
+          <label>Recovery Code</label>
+          <div class="input-wrap">
+            <input type="text" id="reset-code" placeholder="Enter recovery code" autocomplete="off">
+          </div>
+        </div>
+        <div class="login-field">
+          <label>New Password</label>
+          <div class="input-wrap">
+            <input type="password" id="reset-password" placeholder="At least 6 characters" autocomplete="new-password">
+          </div>
+        </div>
+        <div class="login-field">
+          <label>Confirm Password</label>
+          <div class="input-wrap">
+            <input type="password" id="reset-confirm" placeholder="Confirm new password" autocomplete="new-password">
+          </div>
+        </div>
+        <p class="login-error" id="reset-error">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          <span></span>
+        </p>
+        <p class="login-success" id="reset-success"></p>
+        <button type="button" class="login-btn" id="reset-btn" onclick="handleResetPassword()">
+          <span id="reset-btn-text">Reset Password</span>
+        </button>
+        <button type="button" class="login-link-btn" onclick="hideForgotPassword()">Back to Sign In</button>
+      </div>
       <p class="login-footer">Profiling Admin Panel</p>
     </div>
   </div>
@@ -52,6 +92,7 @@
     </div>
     <div class="header-right">
       <span class="admin-label" id="admin-label"></span>
+      <button class="btn btn-sm btn-change-pw" id="change-pw-btn" onclick="openChangePassword()">Change Password</button>
       <button class="btn btn-sm btn-logout" id="logout-btn">Logout</button>
     </div>
   </header>
@@ -155,6 +196,35 @@
       <div class="form-actions">
         <button class="btn btn-secondary" onclick="closeViewModal()">Close</button>
       </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="change-pw-modal">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h2>Change Password</h2>
+        <button class="btn-close" onclick="closeChangePassword()">&times;</button>
+      </div>
+      <form id="change-pw-form" onsubmit="handleChangePassword(event)">
+        <div class="form-group">
+          <label>Current Password</label>
+          <input type="password" id="change-pw-current" required autocomplete="current-password">
+        </div>
+        <div class="form-group">
+          <label>New Password <span class="required">*</span></label>
+          <input type="password" id="change-pw-new" required minlength="6" autocomplete="new-password">
+        </div>
+        <div class="form-group">
+          <label>Confirm New Password <span class="required">*</span></label>
+          <input type="password" id="change-pw-confirm" required minlength="6" autocomplete="new-password">
+        </div>
+        <p class="change-pw-msg" id="change-pw-error"></p>
+        <p class="change-pw-msg success" id="change-pw-success"></p>
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeChangePassword()">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="change-pw-btn-submit">Change Password</button>
+        </div>
+      </form>
     </div>
   </div>
 

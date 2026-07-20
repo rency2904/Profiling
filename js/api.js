@@ -70,4 +70,18 @@ const api = {
   me() {
     return apiRequest(`${API_BASE}/auth/me`);
   },
+
+  changePassword(currentPassword, newPassword) {
+    return apiRequest(`${API_BASE}/auth/change-password`, {
+      method: 'POST',
+      body: JSON.stringify({ currentPassword, newPassword }),
+    });
+  },
+
+  resetPassword(username, recoveryCode, newPassword) {
+    return apiRequest(`${API_BASE}/auth/reset-password`, {
+      method: 'POST',
+      body: JSON.stringify({ username, recoveryCode, newPassword }),
+    });
+  },
 };
