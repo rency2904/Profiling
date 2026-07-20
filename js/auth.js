@@ -36,6 +36,7 @@ async function handleLogin(e) {
   try {
     const result = await api.login(username, password);
     localStorage.setItem('token', result.token);
+    localStorage.setItem('refreshToken', result.refreshToken);
     localStorage.setItem('admin', JSON.stringify(result.admin));
     checkAuth();
   } catch (err) {
@@ -49,8 +50,26 @@ async function handleLogin(e) {
   }
 }
 
-function handleLogout() {
+async function handleLogout() {
+  try {
+    await api.logout();
+  } catch {
+    // proceed with local cleanup even if server call fails
+  }
   localStorage.removeItem('token');
+  localStorage.removeItem('refreshToken');
+  localStorage.removeItem('admin');
+  checkAuth();
+}
+
+async function handleLogoutAll() {
+  try {
+    await api.logoutAll();
+  } catch {
+    // proceed with local cleanup even if server call fails
+  }
+  localStorage.removeItem('token');
+  localStorage.removeItem('refreshToken');
   localStorage.removeItem('admin');
   checkAuth();
 }

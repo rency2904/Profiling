@@ -24,6 +24,13 @@ async function migrate() {
     );
     await pool.query(sql3);
     console.log('Migration 3 completed: admins table created');
+
+    const sql4 = fs.readFileSync(
+      path.join(__dirname, 'migrations', '004_create_sessions.sql'),
+      'utf-8'
+    );
+    await pool.query(sql4);
+    console.log('Migration 4 completed: sessions table created');
   } catch (err) {
     console.error('Migration failed:', err);
   } finally {
