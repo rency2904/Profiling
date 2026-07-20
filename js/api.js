@@ -152,4 +152,18 @@ const api = {
   sessions() {
     return apiRequest(`${API_BASE}/auth/sessions`);
   },
+
+  changePassword(currentPassword, newPassword) {
+    return apiRequest(`${API_BASE}/auth/change-password`, {
+      method: 'POST',
+      body: JSON.stringify({ currentPassword, newPassword }),
+    });
+  },
+
+  resetPassword(username, recoveryCode, newPassword) {
+    return apiRequest(`${API_BASE}/auth/reset-password`, {
+      method: 'POST',
+      body: JSON.stringify({ username, recoveryCode, newPassword }),
+    });
+  },
 };

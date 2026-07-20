@@ -684,6 +684,75 @@ td .actions {
   border-top: 1px solid #f1f5f9;
 }
 
+.login-link-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: none;
+  border: none;
+  color: #6366f1;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px 0 0;
+  transition: color 0.2s;
+}
+
+.login-link-btn:hover { color: #4f46e5; text-decoration: underline; }
+
+.forgot-panel { display: none; }
+
+.forgot-header { text-align: center; margin-bottom: 24px; }
+
+.forgot-header h3 { font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+
+.forgot-header p { font-size: 0.8rem; color: #64748b; }
+
+.login-success {
+  font-size: 0.8rem;
+  color: #16a34a;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: #f0fdf4;
+  border-radius: 8px;
+  border: 1px solid #bbf7d0;
+  text-align: center;
+}
+
+.btn-change-pw {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-weight: 500;
+}
+.btn-change-pw:hover { background: #ddd6fe; }
+
+.change-pw-msg {
+  font-size: 0.8rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  display: none;
+  text-align: center;
+}
+
+.change-pw-msg.success {
+  display: block;
+  color: #16a34a;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+#change-pw-error {
+  display: block;
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+#change-pw-success {
+  display: block;
+}
+
 @media (max-width: 640px) {
   header { padding: 0 16px; }
   main { padding: 16px; }
